@@ -60,7 +60,7 @@ override_dh_auto_build:
 		done ; \
 	        case $${subarch} in \
 		rockchip) \
-			debian/bin/generate-rksd $$builddir $$platform $$subarch; \
+			debian/bin/generate-kpart $$builddir $$platform $$subarch; \
 			;; \
 		qcom) \
 			touch $$builddir/rd; \

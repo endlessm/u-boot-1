@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -x
+set -e
+builddir="$1"
+platform="$2"
+subarch="$3"
+
+${builddir}/tools/mkimage -f debian/chromebook_jerry_endless.its ${builddir}/u-boot-chromium.fit
+echo test >dummy.txt
+vbutil_kernel --arch arm --keyblock doc/chromium/devkeys/kernel.keyblock \
+	--signprivate doc/chromium/devkeys/kernel_data_key.vbprivk \
+	--version 1 --config dummy.txt --vmlinuz ${builddir}/u-boot-chromium.fit \
+	--bootloader dummy.txt --pack ${builddir}/u-boot.kpart
+
+echo ${builddir}/u-boot.kpart /usr/lib/u-boot/${platform}/ \
+    >> debian/build/targets.${subarch}
