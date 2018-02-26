@@ -11,6 +11,7 @@ Build-Depends:
  libpython-dev:native,
  python:any,
  swig,
+ vboot-kernel-utils,
 Standards-Version: 4.1.1
 Homepage: http://www.denx.de/wiki/U-Boot/
 Vcs-Git: https://anonscm.debian.org/git/collab-maint/u-boot.git
