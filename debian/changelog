@@ -1,3 +1,9 @@
+u-boot-rockchip (2017.09-0) eos; urgency=medium
+
+  * Initial packaging
+
+ -- Carlo Caione <carlo@endlessm.com>  Mon, 26 Feb 2018 09:33:30 +0000
+
 u-boot (2017.09+dfsg1-3) unstable; urgency=medium
 
   * Set the fdtfile variable from the value of CONFIG_DEFAULT_DEVICE_TREE
