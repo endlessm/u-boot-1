@@ -86,4 +86,7 @@
 
 #define CONFIG_PREBOOT
 
+/* Endless customizations */
+#define CONFIG_SUPPORT_RAW_INITRD
+
 #endif
