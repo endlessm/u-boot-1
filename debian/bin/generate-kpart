@@ -15,3 +15,7 @@ vbutil_kernel --arch arm --keyblock doc/chromium/devkeys/kernel.keyblock \
 
 echo ${builddir}/u-boot.kpart /usr/lib/u-boot/${platform}/ \
     >> debian/build/targets.${subarch}
+
+${builddir}/tools/mkimage -A arm -T script -C none -d debian/rk3288_boot.scr.cmd ${builddir}/boot.scr
+echo ${builddir}/boot.scr /usr/lib/u-boot/${platform}/ \
+    >> debian/build/targets.${subarch}
