@@ -78,6 +78,7 @@
 /* Linux fails to load the fdt if it's loaded above 256M on a Rock 2 board, so
  * limit the fdt reallocation to that */
 #define CONFIG_EXTRA_ENV_SETTINGS \
+	"silent=true\0" \
 	"fdt_high=0x0fffffff\0" \
 	"initrd_high=0x0fffffff\0" \
 	"partitions=" PARTS_DEFAULT \
@@ -90,5 +91,6 @@
 
 /* Endless customizations */
 #define CONFIG_SUPPORT_RAW_INITRD
+#define CONFIG_SYS_DEVICE_NULLDEV
 
 #endif
