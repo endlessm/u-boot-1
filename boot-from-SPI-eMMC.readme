@@ -1,0 +1,16 @@
+To compile U-Boot:
+$ make O=chromebook_jerry CROSS_COMPILE=arm-linux-gnueabi- -j8 chromebook_jerry_defconfig
+$ make O=chromebook_jerry CROSS_COMPILE=arm-linux-gnueabi- -j8
+$ ./chromebook_jerry/tools/mkimage -n rk3288 -T rkspi -d chromebook_jerry/spl/u-boot-spl.bin spl.bin
+$ dd if=spl.bin of=spl-out.bin bs=128K conv=sync 
+$ cat spl-out.bin chromebook_jerry/u-boot-dtb.img >out.bin
+$ dd if=out.bin of=out.bin.pad bs=4M conv=sync
+
+To flash 'out.bin.pad' into the SPI:
+$ dut-control spi2_vref:pp3300 spi2_buf_en:on spi2_buf_on_flex_en:on spi_hold:off cold_reset:on
+$ dut-control fw_wp_en:on fw_wp_vref:pp3300
+$ dut-control fw_wp:off
+$ sudo /usr/sbin/flashrom -p ft2232_spi:type=servo-v2 --wp-disable
+$ dut-control fw_wp_en:off fw_wp_vref:off
+$ sudo /usr/sbin/flashrom -p ft2232_spi:type=servo-v2 -V -w out.bin.pad
+$ dut-control spi2_vref:off spi2_buf_en:off spi2_buf_on_flex_en:off spi_hold:off cold_reset:off
