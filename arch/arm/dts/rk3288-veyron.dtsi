@@ -143,6 +143,7 @@
 		regulator-max-microvolt = <1350000>;
 		regulator-name = "vdd_logic";
 		regulator-ramp-delay = <4000>;
+		regulator-init-microvolt = <1200000>;
 	};
 
 	vcc33_sys: vcc33-sys {
