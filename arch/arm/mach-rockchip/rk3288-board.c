@@ -26,6 +26,17 @@ DECLARE_GLOBAL_DATA_PTR;
 
 __weak int rk_board_late_init(void)
 {
+	struct udevice *regulator;
+	int ret;
+
+	ret = regulator_get_by_platname("vdd_logic", &regulator);
+	if (ret)
+		debug("%s vdd_logic init fail! ret %d\n", __func__, ret);
+
+	ret = regulator_set_enable(regulator, true);
+	if (ret)
+		debug("%s vdd_logic set fail!\n", __func__);
+
 	return 0;
 }
 
