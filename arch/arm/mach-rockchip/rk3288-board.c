@@ -322,6 +322,7 @@ U_BOOT_CMD(
 	""
 );
 
+#define GRF_SOC_CON0 0xff770244
 #define GRF_SOC_CON2 0xff77024c
 
 int board_early_init_f(void)
@@ -353,6 +354,12 @@ int board_early_init_f(void)
 		return ret;
 	}
 	rk_setreg(GRF_SOC_CON2, 1 << 0);
+
+	/*
+	 * Disable JTAG on sdmmc0 IO. The SDMMC won't work until this bit is
+	 * cleared
+	 */
+	rk_clrreg(GRF_SOC_CON0, 1 << 12);
 
 	return 0;
 }
