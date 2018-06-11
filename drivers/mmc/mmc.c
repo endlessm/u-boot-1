@@ -1940,6 +1940,7 @@ static int mmc_power_init(struct mmc *mmc)
 #if CONFIG_IS_ENABLED(DM_MMC)
 #if defined(CONFIG_DM_REGULATOR) && !defined(CONFIG_SPL_BUILD)
 	struct udevice *vmmc_supply;
+	struct udevice *vqmmc_supply;
 	int ret;
 
 	ret = device_get_supply_regulator(mmc->dev, "vmmc-supply",
@@ -1954,6 +1955,26 @@ static int mmc_power_init(struct mmc *mmc)
 		puts("Error enabling VMMC supply\n");
 		return ret;
 	}
+
+	ret = device_get_supply_regulator(mmc->dev, "vqmmc-supply",
+					  &vqmmc_supply);
+	if (ret) {
+		debug("%s: No vqmmc supply\n", mmc->dev->name);
+		return 0;
+	}
+
+	ret = regulator_set_value(vqmmc_supply, 3300000);
+	if (ret) {
+		puts("Error setting value for VQMMC supply\n");
+		return ret;
+	}
+
+	ret = regulator_set_enable(vqmmc_supply, true);
+	if (ret) {
+		puts("Error enabling VQMMC supply\n");
+		return ret;
+	}
+
 #endif
 #else /* !CONFIG_DM_MMC */
 	/*
