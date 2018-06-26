@@ -1,2 +1,3 @@
 #!/bin/sh
 debian/bin/u-boot-install-targets rockchip "doc/README.rockchip"
+echo "debian/chromebook-update-uboot.sh /usr/sbin/"
