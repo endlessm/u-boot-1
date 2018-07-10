@@ -676,9 +676,11 @@ static void console_update_silent(void)
 int console_announce_r(void)
 {
 #if !CONFIG_IS_ENABLED(PRE_CONSOLE_BUFFER)
-	char buf[DISPLAY_OPTIONS_BANNER_LENGTH];
+	char *buf = "";
 
+#if 0
 	display_options_get_banner(false, buf, sizeof(buf));
+#endif
 
 	console_puts_noserial(stdout, buf);
 #endif
