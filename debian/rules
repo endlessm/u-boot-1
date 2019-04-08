@@ -59,7 +59,7 @@ override_dh_auto_build:
 			echo $$platform >> debian/build/platforms.$$subarch; \
 		done ; \
 	        case $${subarch} in \
-		rockchip) \
+		rockchip-jerry) \
 			debian/bin/generate-kpart $$builddir $$platform $$subarch; \
 			debian/bin/generate-rkspi $$builddir $$platform $$subarch; \
 			;; \
